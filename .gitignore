@@ -1,0 +1,7 @@
+Debug/*
+/Debug/
+build/*
+*.pyc
+python/.vscode/*
+.vscode/settings.json
+.launches/
