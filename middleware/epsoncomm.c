@@ -82,9 +82,13 @@ void EpsonCommInit(void)
 {
     min_init_context(&min_ctx, BOARD_COMM_UART_PID);
     min_register_rx_callback(BOARD_COMM_UART_PID, RxCallback);
-    /* TODO: Initialize default values of communication variable. */
-    dataVar.FLOW_RATE = 10.5f;
-    dataVar.TEMPERATURE = 32;
+}
+
+void EpsonCommUpdateMetrologyParams(USS_Algorithms_Results *ptrData)
+{
+    /* Copy all metrology variables to communication variable. */
+    dataVar.FLOW_RATE = ptrData->volumeFlowRate;
+    dataVar.TEMPERATURE = ptrData->temperature;
 }
 
 void RunEpsonCommFSM(void)
@@ -95,4 +99,3 @@ void RunEpsonCommFSM(void)
     rxCount = UartReadBytes(BOARD_COMM_UART_PID, rxBuff);
     min_poll(&min_ctx, rxBuff, rxCount);
 }
-

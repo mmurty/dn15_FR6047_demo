@@ -8,6 +8,8 @@
 #ifndef __EPSONCOMM_H__
 #define __EPSONCOMM_H__             1
 
+#include "ussSwLib.h"
+
 /* COMMAND-IDs. (Max limited by min protocol to 64). */
 typedef enum
 {
@@ -37,6 +39,9 @@ typedef enum
 
 /* Initialize the communication stack. */
 void EpsonCommInit(void);
+
+/* Copy metrology variables to communication variables. */
+void EpsonCommUpdateMetrologyParams(USS_Algorithms_Results *ptrData);
 
 /* Runs comm state m/c periodically. */
 void RunEpsonCommFSM(void);

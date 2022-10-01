@@ -4,7 +4,7 @@ from time import sleep, time
 from min import MINTransportSerial
 
 # Set your serial port name here. 
-MIN_PORT = "COM15"
+MIN_PORT = "COM12"
 
 def wait_for_frames(min_handler: MINTransportSerial, timeoutMs:int):
     while True:

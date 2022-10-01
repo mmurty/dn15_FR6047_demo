@@ -5,3 +5,7 @@ build/*
 python/.vscode/*
 .vscode/settings.json
 .launches/
+*.o
+*.out
+*.d
+*.obj
