@@ -4,7 +4,7 @@ from time import sleep, time
 from min import MINTransportSerial
 
 # Set your serial port name here. 
-MIN_PORT = "COM12"
+MIN_PORT = "COM9"
 
 def wait_for_frames(min_handler: MINTransportSerial, timeoutMs:int):
     while True:
@@ -22,9 +22,11 @@ def print_rx_frame(min_id, payload):
     if min_id == 1:
         # parse frame contents.
         fwVer = struct.unpack_from("<25s", payload, 0)[0]
+        fwVer = str(fwVer, 'UTF-8')
         hwVer = struct.unpack_from("<15s", payload, 25)[0]
+        hwVer = str(hwVer, 'UTF-8')
         srNo = struct.unpack_from("<I", payload, 40)[0]
-        diameter = struct.unpack_from("<10s", payload, 44)[0]
+        diameter = struct.unpack_from("<B", payload, 44)[0]
         print("\tFwVer ", fwVer)
         print("\tHwVer ", hwVer)
         print("\tSrNo ", srNo)
@@ -48,7 +50,6 @@ def print_rx_frame(min_id, payload):
         print("\tFlow condition ", flowCondition)
         print("\tTemperature ", temperature, "°C")
         
-
 min_handler = MINTransportSerial(port=MIN_PORT)
 min_handler._serial.baudrate = 9600
 
